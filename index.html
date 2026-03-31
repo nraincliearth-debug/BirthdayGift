@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday 💜</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #6a0dad, #c77dff);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.container {
+  padding: 50px 20px;
+}
+
+h1 {
+  font-size: 55px;
+}
+
+.card {
+  background: rgba(255,255,255,0.15);
+  padding: 30px;
+  border-radius: 20px;
+  display: inline-block;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  background: white;
+  color: #6a0dad;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #eee;
+}
+
+/* Floating hearts */
+.heart {
+  position: fixed;
+  bottom: -10px;
+  font-size: 20px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% {transform: translateY(0); opacity: 1;}
+  100% {transform: translateY(-100vh); opacity: 0;}
+}
+
+/* Gallery */
+.gallery img {
+  width: 150px;
+  border-radius: 15px;
+  margin: 10px;
+}
+
+/* Hidden message */
+#secret {
+  display: none;
+  margin-top: 20px;
+  font-size: 20px;
+  color: #ffe4ff;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card">
+    <h1>Happy Birthday 🎉</h1>
+    <p>To someone very special 💜</p>
+
+    <p>
+      I didn’t know what to give you…<br>
+      so I made something instead.<br><br>
+      A small space on the internet,<br>
+      just to remind you that<br>
+      you matter more than you think 💫
+    </p>
+
+    <button onclick="showMessage()">Open this 💌</button>
+
+    <p id="secret">
+      I like you… more than I probably should 💜<br>
+      And I hope this made you smile today 😊
+    </p>
+  </div>
+
+  <h2 style="margin-top:50px;">Memories 📸</h2>
+  <div class="gallery">
+    <img src="photo1.jpg">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+  </div>
+
+</div>
+
+<!-- Music -->
+<audio autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function showMessage() {
+  document.getElementById("secret").style.display = "block";
+}
+
+/* Floating hearts generator */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "💜";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}
+
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
