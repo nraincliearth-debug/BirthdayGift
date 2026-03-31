@@ -11,53 +11,41 @@ body {
   background: linear-gradient(135deg, #6a0dad, #c77dff);
   color: white;
   text-align: center;
-  overflow-x: hidden;
 }
 
-.container {
-  padding: 50px 20px;
+section {
+  display: none;
+  padding: 60px 20px;
 }
 
-h1 {
-  font-size: 55px;
-}
-
-.card {
-  background: rgba(255,255,255,0.15);
-  padding: 30px;
-  border-radius: 20px;
-  display: inline-block;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+.active {
+  display: block;
 }
 
 button {
-  margin-top: 20px;
-  padding: 12px 25px;
+  padding: 10px 20px;
+  margin: 10px;
   border: none;
   border-radius: 10px;
+  cursor: pointer;
   background: white;
   color: #6a0dad;
-  font-size: 16px;
+}
+
+/* Cards */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  background: rgba(255,255,255,0.2);
+  margin: 10px;
+  padding: 20px;
+  border-radius: 15px;
+  width: 150px;
   cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover {
-  background: #eee;
-}
-
-/* Floating hearts */
-.heart {
-  position: fixed;
-  bottom: -10px;
-  font-size: 20px;
-  animation: float 6s linear infinite;
-}
-
-@keyframes float {
-  0% {transform: translateY(0); opacity: 1;}
-  100% {transform: translateY(-100vh); opacity: 0;}
 }
 
 /* Gallery */
@@ -67,74 +55,160 @@ button:hover {
   margin: 10px;
 }
 
-/* Hidden message */
-#secret {
-  display: none;
-  margin-top: 20px;
-  font-size: 20px;
-  color: #ffe4ff;
+/* Timeline */
+.timeline {
+  max-width: 500px;
+  margin: auto;
+  text-align: left;
+}
+
+.timeline div {
+  margin: 10px;
+  padding: 10px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
 }
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
-  <div class="card">
-    <h1>Happy Birthday 🎉</h1>
-    <p>To someone very special 💜</p>
+<!-- HERO -->
+<section id="hero" class="active">
+  <h1>Happy Birthday 🎉</h1>
+  <h2>Anges 💜 Everleigh 💜 Angela</h2>
+  <p>I made something for you 😊</p>
+  <button onclick="next('message')">Start 💌</button>
+</section>
 
-    <p>
-      I didn’t know what to give you…<br>
-      so I made something instead.<br><br>
-      A small space on the internet,<br>
-      just to remind you that<br>
-      you matter more than you think 💫
-    </p>
+<!-- MESSAGE -->
+<section id="message">
+  <h1>For You 💜</h1>
+  <p>
+    I didn’t know what to give you…<br>
+    so I made this instead.<br><br>
+    You’re someone really special to me 😊
+  </p>
+  <button onclick="next('reasons')">Next ➡️</button>
+</section>
 
-    <button onclick="showMessage()">Open this 💌</button>
-
-    <p id="secret">
-      I like you… more than I probably should 💜<br>
-      And I hope this made you smile today 😊
-    </p>
+<!-- REASONS -->
+<section id="reasons">
+  <h1>6 Reasons You're Amazing ✨</h1>
+  <div class="cards">
+    <div class="card" onclick="reveal(this,'Your smile can fix my day 💜')">Tap me</div>
+    <div class="card" onclick="reveal(this,'You’re kind even when no one sees it')">Tap me</div>
+    <div class="card" onclick="reveal(this,'You make simple things feel special')">Tap me</div>
+    <div class="card" onclick="reveal(this,'You’re stronger than you think')">Tap me</div>
+    <div class="card" onclick="reveal(this,'Your laugh is my favorite sound')">Tap me</div>
+    <div class="card" onclick="reveal(this,'Being with you just feels right')">Tap me</div>
   </div>
+  <button onclick="next('memories')">Next ➡️</button>
+</section>
 
-  <h2 style="margin-top:50px;">Memories 📸</h2>
+<!-- MEMORIES -->
+<section id="memories">
+  <h1>Memories 📸</h1>
+
   <div class="gallery">
     <img src="photo1.jpg">
     <img src="photo2.jpg">
     <img src="photo3.jpg">
   </div>
 
-</div>
+  <div class="timeline">
+    <div>💜 The first time we talked</div>
+    <div>💜 The moment you made me smile randomly</div>
+    <div>💜 When I realized you were different</div>
+  </div>
 
-<!-- Music -->
+  <button onclick="next('secret')">Next ➡️</button>
+</section>
+
+<!-- SECRET LOCK -->
+<section id="secret">
+  <h1>🔒 Secret</h1>
+  <p>Only you can open this 💜</p>
+
+  <input type="password" id="pass" placeholder="Enter password">
+  <br>
+  <button onclick="checkPass()">Unlock 💌</button>
+
+  <p id="wrong" style="color:pink;"></p>
+</section>
+
+<!-- SECRET MESSAGE -->
+<section id="secretMessage">
+  <h1>💌 Just for You</h1>
+  <p>
+    I’ve been hiding this…<br><br>
+
+    I like you. A lot.<br>
+    More than I can explain 💜<br><br>
+
+    And I hope… maybe someday,<br>
+    you’ll feel the same 😊
+  </p>
+
+  <button onclick="next('final')">Next ➡️</button>
+</section>
+
+<!-- FINAL -->
+<section id="final">
+  <h1>Final Wish 🎂</h1>
+  <p>
+    I hope you stay happy,<br>
+    and I hope I can be part of your smiles 💜<br><br>
+    — From me 😊
+  </p>
+  <button onclick="confetti()">Celebrate 🎉</button>
+</section>
+
+<!-- MUSIC -->
 <audio autoplay loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-function showMessage() {
-  document.getElementById("secret").style.display = "block";
+function next(id) {
+  document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 }
 
-/* Floating hearts generator */
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerHTML = "💜";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (Math.random() * 20 + 10) + "px";
-  document.body.appendChild(heart);
-
-  setTimeout(() => {
-    heart.remove();
-  }, 6000);
+function reveal(card, text) {
+  card.innerHTML = text;
 }
 
-setInterval(createHeart, 300);
+/* PASSWORD (change this!) */
+function checkPass() {
+  let input = document.getElementById("pass").value;
+
+  if(input === "everleigh") { // CHANGE PASSWORD HERE
+    next('secretMessage');
+  } else {
+    document.getElementById("wrong").innerText = "Wrong password 💔";
+  }
+}
+
+/* CONFETTI */
+function confetti() {
+  for(let i=0;i<100;i++){
+    let c = document.createElement("div");
+    c.innerHTML="🎉";
+    c.style.position="fixed";
+    c.style.left=Math.random()*100+"vw";
+    c.style.top="-10px";
+    document.body.appendChild(c);
+
+    let fall=setInterval(()=>{
+      c.style.top=(parseFloat(c.style.top)+5)+"px";
+      if(parseFloat(c.style.top)>window.innerHeight){
+        c.remove();
+        clearInterval(fall);
+      }
+    },30);
+  }
+}
 </script>
 
 </body>
